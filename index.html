@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fayyaz Enterprises — Global Apparel & Textile Sourcing Since 1975</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES
+    ============================================================ */
+    :root {
+      --navy:      #0a1628;
+      --navy-mid:  #112240;
+      --navy-light:#1a3255;
+      --gold:      #c9a84c;
+      --gold-light:#e8c97a;
+      --gold-pale: #f5e6b8;
+      --white:     #ffffff;
+      --off-white: #f7f4ef;
+      --text-muted:#8a9bb5;
+      --border:    rgba(201,168,76,0.18);
+
+      --ff-display: 'Cormorant Garamond', Georgia, serif;
+      --ff-body:    'DM Sans', sans-serif;
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+
+      --section-pad: clamp(80px, 10vw, 140px);
+      --container:   1180px;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--ff-body);
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+
+    /* ============================================================
+       SCROLLBAR
+    ============================================================ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .container {
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: clamp(20px, 5vw, 60px);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--white);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .gold-line {
+      display: block;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin-top: 24px;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left  { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal-right { opacity: 0; transform: translateX(40px);  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+    .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.3s ease;
+      padding: 22px 0;
+    }
+    #navbar.scrolled {
+      background: rgba(10,22,40,0.97);
+      box-shadow: 0 1px 0 var(--border), 0 8px 32px rgba(0,0,0,0.4);
+      padding: 14px 0;
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .logo-name {
+      font-family: var(--ff-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .logo-name span { color: var(--gold); }
+    .logo-tag {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.72);
+      padding: 8px 14px;
+      border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--gold-light);
+      background: rgba(201,168,76,0.08);
+    }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      padding: 9px 22px !important;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover {
+      background: var(--gold-light) !important;
+      transform: translateY(-1px);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--ff-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--white);
+      padding: 12px 24px;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    /* Woven grid background */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 28px,
+          rgba(201,168,76,0.04) 28px,
+          rgba(201,168,76,0.04) 29px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 28px,
+          rgba(201,168,76,0.04) 28px,
+          rgba(201,168,76,0.04) 29px
+        );
+    }
+
+    /* Fabric weave SVG overlay */
+    .hero-weave {
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* Radial glow */
+    .hero-glow {
+      position: absolute;
+      width: 900px;
+      height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 65%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* Animated threads */
+    .hero-threads {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 55%;
+      overflow: hidden;
+    }
+    .thread {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, rgba(201,168,76,0.15) 30%, rgba(201,168,76,0.3) 50%, rgba(201,168,76,0.15) 70%, transparent 100%);
+      animation: threadMove 8s ease-in-out infinite;
+    }
+    .thread:nth-child(1)  { left:  5%; animation-delay: 0s;    animation-duration: 7s; }
+    .thread:nth-child(2)  { left: 12%; animation-delay: 0.8s;  animation-duration: 9s; opacity: 0.6; }
+    .thread:nth-child(3)  { left: 20%; animation-delay: 1.6s;  animation-duration: 6s; }
+    .thread:nth-child(4)  { left: 28%; animation-delay: 0.4s;  animation-duration: 8s; opacity: 0.7; }
+    .thread:nth-child(5)  { left: 36%; animation-delay: 2.0s;  animation-duration: 7.5s; }
+    .thread:nth-child(6)  { left: 44%; animation-delay: 1.2s;  animation-duration: 9.5s; opacity: 0.5; }
+    .thread:nth-child(7)  { left: 52%; animation-delay: 0.6s;  animation-duration: 6.5s; }
+    .thread:nth-child(8)  { left: 60%; animation-delay: 1.8s;  animation-duration: 8s; opacity: 0.8; }
+    .thread:nth-child(9)  { left: 68%; animation-delay: 2.4s;  animation-duration: 7s; }
+    .thread:nth-child(10) { left: 76%; animation-delay: 0.2s;  animation-duration: 9s; opacity: 0.6; }
+    .thread:nth-child(11) { left: 84%; animation-delay: 1.0s;  animation-duration: 6s; }
+    .thread:nth-child(12) { left: 92%; animation-delay: 2.2s;  animation-duration: 8.5s; opacity: 0.7; }
+
+    @keyframes threadMove {
+      0%, 100% { transform: scaleY(1) translateY(0); opacity: var(--o, 0.4); }
+      50%       { transform: scaleY(0.85) translateY(4%); opacity: calc(var(--o, 0.4) * 1.5); }
+    }
+
+    /* Diagonal accent bar */
+    .hero-accent-bar {
+      position: absolute;
+      left: 0; right: 0;
+      bottom: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold-light) 60%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      padding-top: 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 100px;
+      padding: 7px 18px 7px 10px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.8s var(--ease-out-expo) 0.2s both;
+    }
+    .hero-badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
+      50%       { box-shadow: 0 0 0 6px rgba(201,168,76,0); }
+    }
+    .hero-badge span {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+
+    .hero-headline {
+      font-family: var(--ff-display);
+      font-size: clamp(3rem, 6vw, 5.2rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.35s both;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 22px;
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      max-width: 520px;
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.5s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 40px;
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.65s both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--ff-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 16px 32px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 15px 28px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.25);
+      cursor: pointer;
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.06);
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.8s both;
+    }
+    .hero-stat-num {
+      font-family: var(--ff-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* Scroll cue */
+    .scroll-cue {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUp 1s var(--ease-out-expo) 1.2s both;
+    }
+    .scroll-cue span {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .scroll-cue-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, rgba(201,168,76,0.6), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ============================================================
+       ABOUT SECTION
+    ============================================================ */
+    #about {
+      padding: var(--section-pad) 0;
+      background: var(--off-white);
+      position: relative;
+      overflow: hidden;
+    }
+    #about::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 60px;
+      background: var(--navy);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-left .section-label { color: var(--gold); }
+    .about-left .section-title { color: var(--navy); }
+    .about-left .section-title em { color: var(--gold); }
+    .about-body {
+      color: #4a5568;
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-top: 22px;
+    }
+    .about-body + .about-body { margin-top: 14px; }
+
+    /* Timeline */
+    .timeline {
+      margin-top: 44px;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--gold), rgba(201,168,76,0.1));
+    }
+    .timeline-item {
+      display: flex;
+      gap: 28px;
+      padding-bottom: 30px;
+    }
+    .timeline-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 2px solid var(--gold);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .timeline-dot-inner {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .timeline-year {
+      font-family: var(--ff-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .timeline-text {
+      font-size: 13px;
+      color: #5a6880;
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+
+    /* Stats on the right */
+    .about-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .stat-card {
+      background: var(--navy);
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: background 0.3s;
+    }
+    .stat-card:hover { background: var(--navy-mid); }
+    .stat-card:first-child { border-radius: 12px 0 0 0; }
+    .stat-card:nth-child(2) { border-radius: 0 12px 0 0; }
+    .stat-card:nth-child(3) { border-radius: 0 0 0 12px; }
+    .stat-card:last-child { border-radius: 0 0 12px 0; }
+
+    .stat-num {
+      font-family: var(--ff-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .stat-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       SERVICES SECTION
+    ============================================================ */
+    #services {
+      padding: var(--section-pad) 0;
+      background: var(--navy);
+      position: relative;
+    }
+
+    .services-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background: var(--navy-mid);
+      padding: 44px 36px;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: background 0.4s;
+    }
+    .service-card:hover { background: var(--navy-light); }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s var(--ease-out-expo);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      background: rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      transition: background 0.3s;
+    }
+    .service-card:hover .service-icon { background: rgba(201,168,76,0.2); }
+
+    .service-icon svg { width: 26px; height: 26px; }
+
+    .service-num {
+      font-family: var(--ff-display);
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: rgba(201,168,76,0.07);
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      line-height: 1;
+      transition: color 0.3s;
+    }
+    .service-card:hover .service-num { color: rgba(201,168,76,0.13); }
+
+    .service-title {
+      font-family: var(--ff-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .service-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--gold);
+      margin-top: 20px;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .service-card:hover .service-arrow { opacity: 1; transform: none; }
+
+    /* ============================================================
+       PRODUCTS SECTION
+    ============================================================ */
+    #products {
+      padding: var(--section-pad) 0;
+      background: var(--off-white);
+      position: relative;
+      overflow: hidden;
+    }
+    #products::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 60px;
+      background: var(--navy);
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+    }
+
+    .products-intro {
+      max-width: 560px;
+      margin-bottom: 56px;
+    }
+    .products-intro .section-label { color: var(--gold); }
+    .products-intro .section-title { color: var(--navy); }
+    .products-intro .section-title em { color: var(--gold); }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+
+    .product-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: default;
+      background: var(--navy-mid);
+    }
+    .product-card.tall {
+      grid-row: span 2;
+      aspect-ratio: unset;
+    }
+
+    /* SVG-based product illustrations */
+    .product-visual {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .product-visual svg {
+      width: 60%;
+      height: 60%;
+      opacity: 0.18;
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .product-card:hover .product-visual svg { opacity: 0.08; transform: scale(1.08); }
+
+    /* gradient overlays per card */
+    .product-card[data-cat="tshirts"]    { background: linear-gradient(135deg, #1a3255 0%, #0a1628 100%); }
+    .product-card[data-cat="sweat"]      { background: linear-gradient(135deg, #1c2a44 0%, #112240 100%); }
+    .product-card[data-cat="polo"]       { background: linear-gradient(135deg, #132038 0%, #0c1a30 100%); }
+    .product-card[data-cat="resort"]     { background: linear-gradient(135deg, #1f3050 0%, #142240 100%); }
+    .product-card[data-cat="workwear"]   { background: linear-gradient(135deg, #1a2d48 0%, #0f1e36 100%); }
+    .product-card[data-cat="textiles"]   { background: linear-gradient(135deg, #162742 0%, #0a1628 100%); }
+
+    .product-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.75) 100%);
+    }
+    .product-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px 24px;
+    }
+    .product-tag {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.25);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 8px;
+    }
+    .product-name {
+      font-family: var(--ff-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .product-detail {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 6px;
+      line-height: 1.5;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease-out-expo);
+    }
+    .product-card:hover .product-detail { max-height: 80px; }
+
+    /* ============================================================
+       WHY CHOOSE US
+    ============================================================ */
+    #why {
+      padding: var(--section-pad) 0;
+      background: var(--navy);
+    }
+
+    .why-header { margin-bottom: 60px; }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+
+    .why-card {
+      padding: 44px 32px;
+      background: var(--navy-mid);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .why-card:hover { background: var(--navy-light); }
+
+    .why-card-glow {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      top: -40px; right: -40px;
+      pointer-events: none;
+    }
+
+    .why-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .why-card:hover .why-icon {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+    .why-icon svg { width: 24px; height: 24px; }
+
+    .why-title {
+      font-family: var(--ff-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .why-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       CLIENTS / REACH SECTION
+    ============================================================ */
+    #clients {
+      padding: var(--section-pad) 0;
+      background: var(--off-white);
+      position: relative;
+      overflow: hidden;
+    }
+    #clients::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 60px;
+      background: var(--navy);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
+    }
+
+    .clients-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .clients-header .section-label { color: var(--gold); }
+    .clients-header .section-title { color: var(--navy); }
+    .clients-header .section-title em { color: var(--gold); }
+    .clients-header .gold-line { margin-inline: auto; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+
+    .world-map-wrap {
+      position: relative;
+      margin-bottom: 60px;
+    }
+
+    /* SVG world map */
+    .world-map-svg {
+      width: 100%;
+      max-width: 860px;
+      margin-inline: auto;
+      display: block;
+      opacity: 0.12;
+    }
+
+    /* Market pins */
+    .markets-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .market-card {
+      background: var(--navy);
+      border-radius: 10px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .market-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+    }
+
+    .market-flag {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+    .market-name {
+      font-family: var(--ff-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .market-detail {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Trusted strip */
+    .trusted-strip {
+      background: linear-gradient(90deg, rgba(201,168,76,0.06), rgba(201,168,76,0.12), rgba(201,168,76,0.06));
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 24px 0;
+      margin-top: 60px;
+      text-align: center;
+    }
+    .trusted-strip p {
+      font-family: var(--ff-display);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+    }
+    .trusted-strip strong { color: var(--gold); font-style: normal; }
+
+    /* ============================================================
+       CONTACT SECTION
+    ============================================================ */
+    #contact {
+      padding: var(--section-pad) 0;
+      background: var(--navy);
+      position: relative;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-left .section-title { margin-bottom: 18px; }
+
+    .contact-info-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .contact-info-item:first-of-type { border-top: 1px solid rgba(255,255,255,0.06); }
+    .contact-info-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-info-icon svg { width: 18px; height: 18px; }
+    .contact-info-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .contact-info-value {
+      font-size: 14.5px;
+      color: var(--white);
+      margin-top: 2px;
+      line-height: 1.5;
+    }
+
+    /* Form */
+    .contact-form {
+      background: var(--navy-mid);
+      border-radius: 12px;
+      padding: 48px 44px;
+      border: 1px solid var(--border);
+    }
+
+    .form-title {
+      font-family: var(--ff-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .form-subtitle {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 14px 16px;
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-size: 14px;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+      width: 100%;
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.04);
+    }
+    .form-select {
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238a9bb5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 18px;
+    }
+    .form-select option { background: var(--navy-mid); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--ff-body);
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      margin-top: 8px;
+      letter-spacing: 0.04em;
+    }
+    .form-submit:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+    }
+    .form-submit:active { transform: translateY(0); }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 24px;
+    }
+    .form-success.show { display: block; }
+    .form-success-icon {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .form-success p {
+      color: var(--gold-light);
+      font-family: var(--ff-display);
+      font-size: 1.2rem;
+    }
+    .form-success small {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: #060e1c;
+      padding: 60px 0 30px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-brand .logo-name { font-size: 1.3rem; }
+    .footer-tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-top: 14px;
+      max-width: 280px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .social-btn {
+      width: 36px; height: 36px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .social-btn:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+    .social-btn svg { width: 16px; height: 16px; }
+
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-bottom a { color: var(--gold); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .about-grid    { grid-template-columns: 1fr; gap: 56px; }
+      .about-right   { max-width: 500px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .product-card.tall { grid-row: span 1; aspect-ratio: 4/3; }
+      .why-grid      { grid-template-columns: 1fr 1fr; }
+      .markets-grid  { grid-template-columns: repeat(3, 1fr); }
+      .contact-grid  { grid-template-columns: 1fr; gap: 48px; }
+      .footer-grid   { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links  { display: none; }
+      .hamburger  { display: flex; }
+
+      .hero-threads { width: 100%; opacity: 0.5; }
+      .hero-stats   { gap: 24px; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+
+      .services-header { flex-direction: column; align-items: flex-start; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 28px 22px; }
+
+      .why-grid { grid-template-columns: 1fr; }
+      .markets-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+
+      #about::before, #products::before, #clients::before { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .markets-grid { grid-template-columns: 1fr 1fr; }
+      .about-right  { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#hero" class="logo">
+          <span class="logo-name">Fayyaz <span>Enterprises</span></span>
+          <span class="logo-tag">Est. 1975 · Karachi</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#clients">Markets</a></li>
+          <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+        </ul>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <nav class="mobile-menu" id="mobile-menu">
+    <a href="#about"    class="mob-link">About</a>
+    <a href="#services" class="mob-link">Services</a>
+    <a href="#products" class="mob-link">Products</a>
+    <a href="#why"      class="mob-link">Why Us</a>
+    <a href="#clients"  class="mob-link">Markets</a>
+    <a href="#contact"  class="mob-link" style="color:var(--gold)">Get a Quote</a>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-weave"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-threads">
+      <div class="thread"></div><div class="thread"></div>
+      <div class="thread"></div><div class="thread"></div>
+      <div class="thread"></div><div class="thread"></div>
+      <div class="thread"></div><div class="thread"></div>
+      <div class="thread"></div><div class="thread"></div>
+      <div class="thread"></div><div class="thread"></div>
+    </div>
+    <div class="hero-accent-bar"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span>Global Apparel Sourcing Agency</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Where <em>Fabric Meets</em><br/>Global Commerce
+        </h1>
+
+        <p class="hero-sub">
+          Fayyaz Enterprises connects world-class buyers in the USA, Europe, Canada &amp; New Zealand with Pakistan's finest apparel and home textile manufacturers — since 1975.
+        </p>
+
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+            Request a Quote
+          </a>
+          <a href="#about" class="btn-outline">
+            Discover Our Story
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num" data-count="50">0</div>
+            <div class="hero-stat-label">Years of Excellence</div>
+          </div>
+          <div>
+            <div class="hero-stat-num" data-count="4">0</div>
+            <div class="hero-stat-label">Continents Served</div>
+          </div>
+          <div>
+            <div class="hero-stat-num" data-prefix="$" data-count="24" data-suffix="M+">$0</div>
+            <div class="hero-stat-label">Annual Sales Range</div>
+          </div>
+          <div>
+            <div class="hero-stat-num" data-count="5">0</div>
+            <div class="hero-stat-label">Markets Worldwide</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <div class="scroll-cue-line"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-left">
+          <span class="section-label reveal">Our Story</span>
+          <h2 class="section-title reveal delay-1">
+            Half a Century of<br/><em>Textile Mastery</em>
+          </h2>
+          <p class="about-body reveal delay-2">
+            Founded in 1975 in Karachi, Fayyaz Enterprises has grown from a regional procurement agent into a trusted international sourcing partner. For over five decades, we have bridged the gap between global buyers and Pakistan's world-class manufacturing capabilities.
+          </p>
+          <p class="about-body reveal delay-3">
+            Our deep-rooted relationships with vetted factories across Pakistan's major textile hubs — combined with our meticulous quality oversight — ensure that every shipment reflects the excellence our clients expect.
+          </p>
+
+          <div class="timeline reveal delay-4">
+            <div class="timeline-item">
+              <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+              <div>
+                <div class="timeline-year">1975</div>
+                <div class="timeline-text">Founded in Karachi as a local buying agency, establishing foundational factory partnerships across Pakistan.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+              <div>
+                <div class="timeline-year">1990s</div>
+                <div class="timeline-text">Expanded into European markets, building long-term relationships with buyers in the Netherlands and Germany.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+              <div>
+                <div class="timeline-year">2000s</div>
+                <div class="timeline-text">Entered North American and Pacific markets — USA, Canada, and New Zealand — scaling order volumes significantly.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+              <div>
+                <div class="timeline-year">Today</div>
+                <div class="timeline-text">A full-service sourcing agency managing end-to-end apparel and home textile procurement across 4 continents.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-right reveal-right">
+          <div class="stat-card">
+            <div class="stat-num" data-count="50">0</div>
+            <div class="stat-label">Years Established</div>
+            <div class="stat-desc">Continuous operations from Karachi since 1975, building unmatched industry trust.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-count="5">0</div>
+            <div class="stat-label">Global Markets</div>
+            <div class="stat-desc">USA, Netherlands, Germany, Canada &amp; New Zealand — active buyer relationships.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-count="100">0</div>
+            <div class="stat-label">% Quality Focus</div>
+            <div class="stat-desc">Inline and final inspections on every order, no exceptions.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-prefix="$" data-count="24" data-suffix="M">$0</div>
+            <div class="stat-label">Peak Annual Sales</div>
+            <div class="stat-desc">Proven capability handling large-volume, high-value procurement programmes.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SERVICES
+  ============================================================ -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header">
+        <div>
+          <span class="section-label reveal">What We Do</span>
+          <h2 class="section-title reveal delay-1">
+            End-to-End Sourcing<br/><em>Services</em>
+          </h2>
+        </div>
+        <p class="reveal delay-2" style="max-width:340px;color:var(--text-muted);font-size:14px;line-height:1.75">
+          From factory discovery to doorstep delivery — we manage every step of your apparel and textile procurement journey.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Card 1 -->
+        <div class="service-card reveal">
+          <div class="service-num">01</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+              <path d="M11 8v6M8 11h6"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Factory Sourcing &amp; Selection</h3>
+          <p class="service-desc">We identify and vet the ideal manufacturing partners for your product — evaluating capacity, compliance, certifications, and quality systems before you commit.</p>
+          <span class="service-arrow">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="service-card reveal delay-1">
+          <div class="service-num">02</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Competitive Price Negotiation</h3>
+          <p class="service-desc">Leveraging decades of factory relationships, we secure the most competitive pricing without compromising on quality — protecting your margins at every turn.</p>
+          <span class="service-arrow">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="service-card reveal delay-2">
+          <div class="service-num">03</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+              <polyline points="9 11 12 14 22 4"/>
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Order Management &amp; Follow-up</h3>
+          <p class="service-desc">From purchase order to shipment, we manage timelines, production schedules, and supplier communication — keeping you informed at every stage.</p>
+          <span class="service-arrow">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="service-card reveal delay-1">
+          <div class="service-num">04</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Quality Control &amp; Inspections</h3>
+          <p class="service-desc">Our team conducts both inline and final quality inspections to international standards — catching defects before they reach your warehouse or customers.</p>
+          <span class="service-arrow">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="service-card reveal delay-2">
+          <div class="service-num">05</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Design &amp; Development</h3>
+          <p class="service-desc">We collaborate on product design and development for home textiles — from concept and sampling to bulk production — translating your vision into market-ready products.</p>
+          <span class="service-arrow">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="service-card reveal delay-3">
+          <div class="service-num">06</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Global Logistics Coordination</h3>
+          <p class="service-desc">We coordinate shipping, documentation, and customs requirements — ensuring seamless delivery to your destination country on time and in compliance.</p>
+          <span class="service-arrow">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRODUCTS
+  ============================================================ -->
+  <section id="products">
+    <div class="container">
+      <div class="products-intro">
+        <span class="section-label reveal">Product Range</span>
+        <h2 class="section-title reveal delay-1">
+          Apparel &amp; Textiles<br/><em>We Source</em>
+        </h2>
+      </div>
+
+      <div class="products-grid">
+        <!-- T-Shirts — tall card -->
+        <div class="product-card tall reveal" data-cat="tshirts">
+          <div class="product-visual">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 30 L40 15 L60 25 L80 15 L100 30 L85 45 L75 40 L75 100 L45 100 L45 40 L35 45 Z" fill="#c9a84c"/>
+            </svg>
+          </div>
+          <div class="product-overlay"></div>
+          <div class="product-content">
+            <span class="product-tag">Knitwear</span>
+            <div class="product-name">T-Shirts &amp; Polos</div>
+            <div class="product-detail">Basic, fashion, and performance tees in cotton, poly-cotton, and blended fabrics. Polo shirts for retail, uniform, and corporate wear.</div>
+          </div>
+        </div>
+
+        <!-- Sweatshirts -->
+        <div class="product-card reveal delay-1" data-cat="sweat">
+          <div class="product-visual">
+            <svg viewBox="0 0 120 100" fill="none">
+              <path d="M10 25 L30 10 L60 20 L90 10 L110 25 L95 45 L80 38 L80 90 L40 90 L40 38 L25 45 Z" fill="#c9a84c"/>
+            </svg>
+          </div>
+          <div class="product-overlay"></div>
+          <div class="product-content">
+            <span class="product-tag">Knitwear</span>
+            <div class="product-name">Sweatshirts &amp; Hoodies</div>
+            <div class="product-detail">Fleece, French terry, and brushed-back styles in weights from 220gsm to 400gsm.</div>
+          </div>
+        </div>
+
+        <!-- Jogging Pants -->
+        <div class="product-card reveal delay-2" data-cat="polo">
+          <div class="product-visual">
+            <svg viewBox="0 0 100 120" fill="none">
+              <path d="M20 10 L80 10 L80 40 L65 40 L65 110 L55 110 L50 60 L45 110 L35 110 L35 40 L20 40 Z" fill="#c9a84c"/>
+            </svg>
+          </div>
+          <div class="product-overlay"></div>
+          <div class="product-content">
+            <span class="product-tag">Activewear</span>
+            <div class="product-name">Jogging &amp; Track Pants</div>
+            <div class="product-detail">Drawstring joggers, track pants, and athletic bottoms in fleece and jersey.</div>
+          </div>
+        </div>
+
+        <!-- Resort Wear -->
+        <div class="product-card reveal delay-1" data-cat="resort">
+          <div class="product-visual">
+            <svg viewBox="0 0 120 120" fill="none">
+              <ellipse cx="60" cy="30" rx="30" ry="20" fill="#c9a84c"/>
+              <path d="M35 35 Q50 90 60 100 Q70 90 85 35 Q70 50 60 48 Q50 50 35 35Z" fill="#c9a84c" opacity="0.8"/>
+            </svg>
+          </div>
+          <div class="product-overlay"></div>
+          <div class="product-content">
+            <span class="product-tag">Leisure</span>
+            <div class="product-name">Resort &amp; Leisure Wear</div>
+            <div class="product-detail">Beachwear, casual summer collections, and resort-branded garment programmes.</div>
+          </div>
+        </div>
+
+        <!-- Workwear / Uniforms -->
+        <div class="product-card reveal delay-2" data-cat="workwear">
+          <div class="product-visual">
+            <svg viewBox="0 0 120 120" fill="none">
+              <rect x="30" y="30" width="60" height="70" rx="6" fill="#c9a84c" opacity="0.9"/>
+              <rect x="50" y="30" width="20" height="15" rx="3" fill="#0a1628"/>
+              <line x1="60" y1="55" x2="60" y2="85" stroke="#0a1628" stroke-width="3"/>
+              <line x1="45" y1="65" x2="75" y2="65" stroke="#0a1628" stroke-width="3"/>
+            </svg>
+          </div>
+          <div class="product-overlay"></div>
+          <div class="product-content">
+            <span class="product-tag">Workwear</span>
+            <div class="product-name">Uniforms &amp; Workwear</div>
+            <div class="product-detail">Corporate, hospitality, and industrial uniforms with custom embroidery and branding.</div>
+          </div>
+        </div>
+
+        <!-- Home Textiles -->
+        <div class="product-card reveal delay-3" data-cat="textiles">
+          <div class="product-visual">
+            <svg viewBox="0 0 120 100" fill="none">
+              <rect x="10" y="20" width="100" height="60" rx="8" fill="#c9a84c" opacity="0.9"/>
+              <rect x="25" y="10" width="70" height="18" rx="4" fill="#c9a84c"/>
+              <line x1="10" y1="40" x2="110" y2="40" stroke="#0a1628" stroke-width="2" opacity="0.4"/>
+              <line x1="10" y1="55" x2="110" y2="55" stroke="#0a1628" stroke-width="2" opacity="0.4"/>
+              <line x1="10" y1="70" x2="110" y2="70" stroke="#0a1628" stroke-width="2" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="product-overlay"></div>
+          <div class="product-content">
+            <span class="product-tag">Home Textiles</span>
+            <div class="product-name">Fitted Sheets &amp; Towels</div>
+            <div class="product-detail">100% cotton and blended home textile ranges — fitted sheets, flat sheets, pillowcases, and bath towels for retail and hospitality.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY CHOOSE US
+  ============================================================ -->
+  <section id="why">
+    <div class="container">
+      <div class="why-header">
+        <span class="section-label reveal">Our Strengths</span>
+        <h2 class="section-title reveal delay-1" style="max-width:540px">
+          Why Global Buyers<br/><em>Trust Fayyaz</em>
+        </h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-card-glow"></div>
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+            </svg>
+          </div>
+          <div class="why-title">Global Reach</div>
+          <div class="why-desc">Active buyer relationships across 5 markets spanning 4 continents — USA, Netherlands, Germany, Canada, and New Zealand.</div>
+        </div>
+
+        <div class="why-card reveal delay-1">
+          <div class="why-card-glow"></div>
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="why-title">Quality Assurance</div>
+          <div class="why-desc">Both inline and final quality inspections on every order, ensuring defect-free product aligned with international standards.</div>
+        </div>
+
+        <div class="why-card reveal delay-2">
+          <div class="why-card-glow"></div>
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="why-title">50 Years Experience</div>
+          <div class="why-desc">Since 1975, we have navigated every cycle of the global textile market — providing stability and expertise buyers can rely on.</div>
+        </div>
+
+        <div class="why-card reveal delay-3">
+          <div class="why-card-glow"></div>
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <div class="why-title">Vetted Factory Network</div>
+          <div class="why-desc">A curated network of certified Pakistani factories across knit and woven apparel and home textiles, tested over decades.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CLIENTS / MARKETS
+  ============================================================ -->
+  <section id="clients">
+    <div class="container">
+      <div class="clients-header">
+        <span class="section-label reveal">Global Reach</span>
+        <h2 class="section-title reveal delay-1">
+          Markets We <em>Serve</em>
+        </h2>
+        <span class="gold-line"></span>
+        <p class="reveal delay-2" style="color:#4a5568;font-size:15px;max-width:520px;margin:18px auto 0;line-height:1.75">
+          We maintain active buyer partnerships across five key markets, delivering Pakistan's finest apparel and textiles to retailers, brands, and distributors worldwide.
+        </p>
+      </div>
+
+      <div class="markets-grid">
+        <div class="market-card reveal">
+          <div class="market-flag">🇺🇸</div>
+          <div class="market-name">United States</div>
+          <div class="market-detail">Primary Export Market</div>
+        </div>
+        <div class="market-card reveal delay-1">
+          <div class="market-flag">🇳🇱</div>
+          <div class="market-name">Netherlands</div>
+          <div class="market-detail">European Hub</div>
+        </div>
+        <div class="market-card reveal delay-2">
+          <div class="market-flag">🇩🇪</div>
+          <div class="market-name">Germany</div>
+          <div class="market-detail">Key European Partner</div>
+        </div>
+        <div class="market-card reveal delay-3">
+          <div class="market-flag">🇨🇦</div>
+          <div class="market-name">Canada</div>
+          <div class="market-detail">North American Market</div>
+        </div>
+        <div class="market-card reveal delay-4">
+          <div class="market-flag">🇳🇿</div>
+          <div class="market-name">New Zealand</div>
+          <div class="market-detail">Pacific Market</div>
+        </div>
+      </div>
+
+      <div class="trusted-strip reveal">
+        <p>Trusted by leading retailers &amp; brands since <strong>1975</strong> — delivering quality across <strong>4 continents</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+  ============================================================ -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Left: info -->
+        <div class="contact-left reveal-left">
+          <span class="section-label">Get in Touch</span>
+          <h2 class="section-title">
+            Start Your Sourcing<br/><em>Journey</em>
+          </h2>
+          <p style="color:var(--text-muted);font-size:14px;line-height:1.8;margin-top:16px;margin-bottom:36px">
+            Ready to source premium apparel and home textiles from Pakistan? Send us your inquiry and our team will respond within 24 hours.
+          </p>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Office Address</div>
+              <div class="contact-info-value">407, 4th Floor, Uni Towers,<br/>I.I. Chundrigar Road, Karachi, Pakistan</div>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Phone</div>
+              <div class="contact-info-value">+92 21 — Contact via form</div>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-value">info@fayyazenterprises.com</div>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Response Time</div>
+              <div class="contact-info-value">Within 24 business hours</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="reveal-right">
+          <div class="contact-form">
+            <div class="form-title">Request a Quote</div>
+            <p class="form-subtitle">Fill in the details below and we'll be in touch.</p>
+
+            <form id="quoteForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="fname">Full Name *</label>
+                  <input class="form-input" type="text" id="fname" name="name" placeholder="John Smith" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="fcompany">Company *</label>
+                  <input class="form-input" type="text" id="fcompany" name="company" placeholder="Your Company" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="femail">Email *</label>
+                  <input class="form-input" type="email" id="femail" name="email" placeholder="you@company.com" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="fcountry">Country *</label>
+                  <select class="form-select" id="fcountry" name="country" required>
+                    <option value="" disabled selected>Select country</option>
+                    <option>United States</option>
+                    <option>Netherlands</option>
+                    <option>Germany</option>
+                    <option>Canada</option>
+                    <option>New Zealand</option>
+                    <option>United Kingdom</option>
+                    <option>Australia</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="fproduct">Product Category</label>
+                <select class="form-select" id="fproduct" name="product">
+                  <option value="" disabled selected>What are you looking to source?</option>
+                  <option>T-Shirts / Polos</option>
+                  <option>Sweatshirts / Hoodies</option>
+                  <option>Jogging / Track Pants</option>
+                  <option>Resort / Leisure Wear</option>
+                  <option>Uniforms / Workwear</option>
+                  <option>Fitted Sheets / Towels</option>
+                  <option>Multiple Categories</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="fmessage">Message *</label>
+                <textarea class="form-textarea" id="fmessage" name="message" placeholder="Tell us about your requirements — order volumes, specifications, target markets, timeline..." required></textarea>
+              </div>
+              <button type="submit" class="form-submit">Send Enquiry →</button>
+            </form>
+
+            <div class="form-success" id="formSuccess">
+              <div class="form-success-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p>Thank you! We've received your enquiry.</p>
+              <small>Our team will respond within 24 business hours.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#hero" class="logo">
+            <span class="logo-name">Fayyaz <span>Enterprises</span></span>
+            <span class="logo-tag">Est. 1975 · Karachi, Pakistan</span>
+          </a>
+          <p class="footer-tagline">
+            Pakistan's trusted apparel and home textile sourcing agency — connecting global buyers with world-class manufacturing since 1975.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#8a9bb5" stroke-width="1.8">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#8a9bb5" stroke-width="1.8">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#8a9bb5" stroke-width="1.8">
+                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Our Services</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#why">Why Choose Us</a></li>
+            <li><a href="#clients">Our Markets</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Products</div>
+          <ul class="footer-links">
+            <li><a href="#products">T-Shirts &amp; Polos</a></li>
+            <li><a href="#products">Sweatshirts</a></li>
+            <li><a href="#products">Jogging Pants</a></li>
+            <li><a href="#products">Resort Wear</a></li>
+            <li><a href="#products">Home Textiles</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="#contact">Request a Quote</a></li>
+            <li><a href="mailto:info@fayyazenterprises.com">info@fayyazenterprises.com</a></li>
+            <li style="color:var(--text-muted);font-size:13.5px;line-height:1.6;pointer-events:none">407, 4th Floor, Uni Towers,<br/>I.I. Chundrigar Road,<br/>Karachi, Pakistan</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Fayyaz Enterprises. All rights reserved.</p>
+        <p>Designed with care for global textile trade · <a href="#hero">Back to top ↑</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ── Navbar scroll ──────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Mobile menu ────────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mob-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ── Scroll Reveal ──────────────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Animated counters ──────────────────────────────────────
+    function animateCount(el) {
+      const target = +el.dataset.count;
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1800;
+      const start = performance.now();
+      function step(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const current = Math.round(eased * target);
+        el.textContent = prefix + current + (t === 1 ? suffix : '');
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCount(e.target);
+          counterObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+    // ── Contact form ───────────────────────────────────────────
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = this;
+      form.style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+    });
+  </script>
+</body>
+</html>
